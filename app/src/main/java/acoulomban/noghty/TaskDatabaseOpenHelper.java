@@ -51,7 +51,37 @@ public class TaskDatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     public Task findTasksByParent(int parentID) {
-        String query = "Select * FROM " + DATABASE_NAME + " WHERE " + "ID " + "= " + parentID + ";";
+        //TODO : more than one result (look at moveToNext
+        String query = "Select * FROM " + DATABASE_NAME + " WHERE " + "PARENT_TASK " + "= " + parentID + ";";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        Task task = new Task();
+
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            task.setId(Integer.parseInt(cursor.getString(0)));
+            task.setLabel(cursor.getString(1));
+            task.setState(cursor.getString(2));
+            task.setParentTask(Integer.parseInt(cursor.getString(3)));
+            task.setDescription(cursor.getString(4));
+
+            cursor.close();
+
+        } else {
+            task = null;
+        }
+
+        db.close();
+        return task;
+
+    }
+
+
+    public Task findTaskById(int id) {
+        String query = "Select * FROM " + DATABASE_NAME + " WHERE " + "ID " + "= " + id + ";";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -79,6 +109,7 @@ public class TaskDatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     public Task findTasksByLabel(String label) {
+        //TODO : more than one result (look at moveToNext
         String query = "Select * FROM " + DATABASE_NAME + " WHERE " + "LABEL " + "LIKE " + "'" + label +"'" + ";";
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -105,4 +136,11 @@ public class TaskDatabaseOpenHelper extends SQLiteOpenHelper {
         return task;
 
     }
+
+    public boolean deleteTaskById(int id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(DATABASE_NAME, "ID" + "=" + Integer.toString(id), null ) > 0;
+    }
+
 }
