@@ -1,10 +1,12 @@
 package acoulomban.noghty;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 public class HomeActivity extends Activity {
@@ -13,6 +15,21 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_home);
+
+        Context context = getApplicationContext();
+
+        TaskDatabaseOpenHelper TaskDatabaseOH = new TaskDatabaseOpenHelper(context);
+
+        Task rootTask = new Task(0, "testlabel", "teststate", 0, "testdesc");
+        TaskDatabaseOH.addTask(rootTask);
+
+        Task tesTask;
+        tesTask = TaskDatabaseOH.findTasksByLabel("testlabel");
+
+        Toast toast = Toast.makeText(context, tesTask.getDescription(), Toast.LENGTH_LONG);
+        toast.show();
+
+
     }
 
     @Override
@@ -20,6 +37,7 @@ public class HomeActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
+        //TODO
     }
 
     @Override
@@ -35,5 +53,6 @@ public class HomeActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+        //TODO
     }
 }

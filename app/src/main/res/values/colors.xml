@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="apple_green" type="color">##99CC00</item>
+    <item name="green_apple" type="color">#99CC00</item>
+    <item name="white" type="color">#ffffff</item>
+
 
 
 </resources>

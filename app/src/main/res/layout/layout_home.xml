@@ -5,12 +5,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="acoulomban.noghty.HomeActivity"
-    android:background="#ffffffff">
+    android:background="@color/white">
 
-    <TextView android:text="@string/home" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TextView android:text="@string/home"
         android:id="@+id/home_title"
-        android:gravity="center_horizontal|top"
-        android:textSize="40dp" />
+        style="@style/title" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Add a task"
+        android:id="@+id/home_addtask"
+        android:layout_below="@+id/home_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/white"
+        android:gravity="center" />
 
 </RelativeLayout>
