@@ -20,13 +20,13 @@ public class HomeActivity extends Activity {
 
         TaskDatabaseOpenHelper TaskDatabaseOH = new TaskDatabaseOpenHelper(context);
 
-        Task rootTask = new Task(0, "testlabel", "teststate", 0, "testdesc");
+        Task rootTask = new Task("testlabel2", "teststate", 0, "testdesc");
         TaskDatabaseOH.addTask(rootTask);
 
         Task tesTask;
-        tesTask = TaskDatabaseOH.findTasksByLabel("testlabel");
+        tesTask = TaskDatabaseOH.findTasksByLabel("testlabel2");
 
-        Toast toast = Toast.makeText(context, tesTask.getDescription(), Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(context, Integer.toString(tesTask.getId()), Toast.LENGTH_LONG);
         toast.show();
 
 

@@ -14,8 +14,7 @@ public class Task {
 
     }
 
-    public Task(int id, String label, String state, int parentTask, String description) {
-        this.id = id;
+    public Task(String label, String state, int parentTask, String description) {
         this.label = label;
         this.state = state;
         this.parentTask = parentTask;
